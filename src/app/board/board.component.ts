@@ -1,3 +1,4 @@
+import { GameService } from './../shared/game/game.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BoardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private gameService: GameService) {}
 
   ngOnInit() {
   }

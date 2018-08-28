@@ -1,4 +1,4 @@
-import { GameService } from './../shared/game/game.service';
+import { StatusService } from './../shared/status/status.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,9 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StatusComponent implements OnInit {
 
-  constructor(private gameService: GameService) {}
+  constructor(private statusService: StatusService) {}
 
   ngOnInit() {
   }
-
 }
