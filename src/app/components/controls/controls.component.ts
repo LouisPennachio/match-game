@@ -13,4 +13,11 @@ export class ControlsComponent implements OnInit {
   ngOnInit() {
   }
 
+  preview(numberOfMatches: number) {
+    this.controlsService.preview(numberOfMatches);
+  }
+
+  endTurn() {
+    this?c
+  }
 }

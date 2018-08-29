@@ -14,9 +14,11 @@ export class GameService {
   readonly matches: Subject<number> = new ReplaySubject(1);
 
   /**
-   * Emits the number of matches that a player wants to remove before he actually ends his turn.
+   * Forwards the number of removed matches to preview from the {@link ControlsService} subject.
    */
-  readonly preview: Subject<number> = new Subject();
+  get previewMatches(): Subject<number> {
+    return this.controlsService.previewMatches
+  }
 
   /**
    * The current number of matches in game.
