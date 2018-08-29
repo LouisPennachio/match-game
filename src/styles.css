@@ -2,14 +2,31 @@
 body {
     height: 100%;
     text-align: center;
-    background: #c31432;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to left, #240b36, #c31432);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to left, #240b36, #c31432); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #a73737;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #7a2828, #a73737);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #7a2828, #a73737); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
+      
 }
 
-h1, p {
+h1, p, button {
     color: white;
     font-family: 'Quicksand', sans-serif;
+}
+
+button {
+    border: 0.5px solid white;
+    background: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color:#7a2828;
+    outline:0;
+}
+
+button:focus {
+    outline:0;
 }
 
 h1 {

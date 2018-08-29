@@ -77,6 +77,7 @@ export class GameService {
   private updateControls() {
     this.controlsService.updateControls(this.matches.value);
   }
+  
   /**
    * Returns a random number of matches to fill the board.
    * The number of matches is between {@link MIN_NUMBER_OF_MATCHES} and {@link MIN_NUMBER_OF_MATCHES} + {@link NUMBER_OF_MATCHES_VARIATIONS}

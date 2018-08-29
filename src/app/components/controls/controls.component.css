@@ -1,0 +1,31 @@
+.preview-buttons {
+    height: 50px;
+    width: 30%;
+    display: inline-block;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+.preview-button {
+    width: 30%;
+    height: 100%;
+}
+
+.preview-button-1 {
+    position: absolute;
+    left: 0px;
+}
+
+.preview-button-2 {
+    margin: 0 auto;
+}
+
+.preview-button-3 {
+    position: absolute;
+    right: 0px;
+}
+
+.action {
+    height: 70px;
+    width: 30%;
+}

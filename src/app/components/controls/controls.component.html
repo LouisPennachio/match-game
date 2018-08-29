@@ -1,5 +1,7 @@
-<button type="button" (click)="preview(1)">1</button>
-<button type="button" (click)="preview(2)">2</button>
-<button type="button" (click)="preview(3)">3</button>
+<div class="preview-buttons">
+    <button type="button" class="preview-button preview-button-1" (click)="preview(1)">1</button>
+    <button type="button" class="preview-button preview-button-2" (click)="preview(2)">2</button>
+    <button type="button" class="preview-button preview-button-3" (click)="preview(3)">3</button>
+</div>
 <br/>
-<button type="button" (click)="endTurn()">Fin du tour</button>
+<button type="button" class="action" (click)="endTurn()">Fin du tour</button>
