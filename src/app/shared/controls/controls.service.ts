@@ -1,5 +1,5 @@
 import { MAX_NUMBER_OF_MATCHES_REMOVED } from './../constants';
-import { Subject, ReplaySubject, Observable } from 'rxjs';
+import { Subject, ReplaySubject, Observable, BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -17,7 +17,7 @@ export class ControlsService {
   /**
    * Emits the number of matches that a player wants to remove before he actually ends his turn.
    */
-  readonly previewMatches: Subject<number> = new Subject();
+  readonly previewMatches: BehaviorSubject<number> = new BehaviorSubject(1);
 
   /**
    * Subject that emits empty data to let the game know that is has to move on to the next step.
