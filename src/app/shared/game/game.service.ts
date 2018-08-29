@@ -9,6 +9,11 @@ import { NUMBER_OF_MATCHES_VARIATIONS, MIN_NUMBER_OF_MATCHES, MAX_NUMBER_OF_MATC
 })
 export class GameService {
   /**
+   * The current number of matches in game.
+   */
+  private numberOfMatches: number;
+
+  /**
    * Emits the current number of matches in game.
    */
   readonly matches: Subject<number> = new ReplaySubject(1);
@@ -21,14 +26,9 @@ export class GameService {
   }
 
   /**
-   * The current number of matches in game.
-   */
-  private numberOfMatches: number;
-
-  /**
    * The player that should make a move.
    */
-  private currentPlayer: String;
+  private currentPlayer: any;
 
   /**
    * Will be set to false when all the matches will be removed.
@@ -93,5 +93,9 @@ export class GameService {
 
   restartGame() {
     this.initGame();
+  }
+
+  private switchPlayer() {
+    this.currentPlayer = PLAYERS.find(player => player.id = this.currentPlayer.id + 1 % 2);
   }
 }

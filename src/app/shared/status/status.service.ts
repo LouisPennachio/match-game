@@ -22,11 +22,11 @@ export class StatusService {
    * @param name The name of the current player.
    * @param gameEnded True if the game ended, false otherwise.
    */
-  updateStatus(name: String, gameEnded: boolean) {
+  updateStatus(player: any, gameEnded: boolean) {
     if (!gameEnded) {
-      this.status.next(`It's ${name} turn !`);
+      this.status.next(`It's ${player.name} turn !`);
     } else {
-      this.status.next(`${name} won !`)
+      this.status.next(`${player.name} won !`)
     }
   }
 }

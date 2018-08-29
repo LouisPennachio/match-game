@@ -18,6 +18,6 @@ export class ControlsComponent implements OnInit {
   }
 
   endTurn() {
-    this?c
+    this.controlsService.endTurn();
   }
 }

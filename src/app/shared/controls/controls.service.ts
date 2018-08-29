@@ -1,5 +1,5 @@
 import { MAX_NUMBER_OF_MATCHES_REMOVED } from './../constants';
-import { Subject, ReplaySubject } from 'rxjs';
+import { Subject, ReplaySubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -19,6 +19,11 @@ export class ControlsService {
    */
   readonly previewMatches: Subject<number> = new Subject();
 
+  /**
+   * Subject that emits empty data to let the game know that is has to move on to the next step.
+   */
+  readonly playerAction: Subject<null> = new Subject();
+
   constructor() { }
 
   /**
@@ -32,6 +37,10 @@ export class ControlsService {
 
   preview(numberOfMatches: number) {
     this.previewMatches.next(numberOfMatches);
+  }
+
+  endTurn() {
+    this.playerAction.next();
   }
 
   /**
