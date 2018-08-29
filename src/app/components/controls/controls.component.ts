@@ -1,3 +1,4 @@
+import { ControlsService } from './../../shared/controls/controls.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ControlsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private controlsService: ControlsService) { }
 
   ngOnInit() {
   }

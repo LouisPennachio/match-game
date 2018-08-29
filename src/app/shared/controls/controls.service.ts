@@ -13,6 +13,11 @@ export class ControlsService {
 
   constructor() { }
 
+  /**
+   * Updates the controls with the current number of matches in game.
+   * 
+   * @param numberOfMatches The current number of matches in game.
+   */
   updateControls(numberOfMatches: number) {
     this.removableMatches.next(this.getNumberOfRemovableMatches(numberOfMatches)); 
   }

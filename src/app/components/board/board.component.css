@@ -1,0 +1,9 @@
+.match {
+    display:inline-block;
+    height: 50px;
+    width: 50px;
+}
+
+.transparent-match {
+    opacity: 0.2;
+}

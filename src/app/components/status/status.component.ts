@@ -1,4 +1,4 @@
-import { StatusService } from './../shared/status/status.service';
+import { StatusService } from './../../shared/status/status.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
