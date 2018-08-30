@@ -1,5 +1,9 @@
+import { PREVIEW, TAKE } from './../../actions/matches';
+import { State } from './../../reducers/game';
+import { Observable } from 'rxjs';
 import { ControlsService } from './../../shared/controls/controls.service';
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'controls',
@@ -8,16 +12,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ControlsComponent implements OnInit {
 
-  constructor(private controlsService: ControlsService) { }
+  private gameState: Observable<State>;
+
+  constructor(private store: Store<State>) {
+    this.gameState = store.select('game');
+    this.gameState.subscribe(state => {
+      
+    });
+  }
 
   ngOnInit() {
   }
 
-  preview(numberOfMatches: number) {
-    this.controlsService.preview(numberOfMatches);
+  private displayPreviewButtons(matches: number) {
+    
+  }
+
+  preview(matches: number) {
+    this.store.dispatch({type: PREVIEW, payload: matches});
   }
 
   endTurn() {
-    this.controlsService.endTurn();
+    this.store.dispatch({type: TAKE});
   }
 }

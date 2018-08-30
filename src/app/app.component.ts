@@ -1,3 +1,6 @@
+import { Store } from '@ngrx/store';
+import { State } from './reducers/game';
+import { INIT } from './actions/game';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,4 +10,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'match-game';
+
+  constructor(private store: Store<State>) {
+    store.dispatch({type: INIT});
+  }
 }

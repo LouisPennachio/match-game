@@ -1,7 +1,8 @@
+import { State } from './../../reducers/game';
+import { Observable } from 'rxjs';
 import { MAX_NUMBER_OF_MATCHES_REMOVED } from './../../shared/constants';
-import { element } from 'protractor';
-import { GameService } from './../../shared/game/game.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'board',
@@ -18,31 +19,39 @@ export class BoardComponent implements OnInit {
 
   @ViewChild("matches") matches: ElementRef;
 
-  constructor(private gameService: GameService) {
-    gameService.matches.subscribe(matches => {
-      this.matchesArray = Array(matches);
-    });
+  private gameState: Observable<State>;
 
-    ngOnInit() {
-    }
-    
-    gameService.previewMatches.subscribe(numberOfRemovedMatches => {
-      // We get the HTMLCollection containing all the matches
-      let elements = Array.from(document.getElementsByClassName('match'));
-      let numberOfMatches = elements.length;
-      this.applyOpacity(elements, numberOfMatches, numberOfRemovedMatches);
+  constructor(private store: Store<State>) {
+    this.gameState = store.select('game');
+    this.gameState.subscribe(state => {
+      this.displayMatches(state.matches);
+      this.previewMatches(state.matchesToPreview);
     });
   }
 
+  ngOnInit() {
+  }
 
+  private displayMatches(matches: number) {
+    if (this.matchesArray.length != matches) {
+      this.matchesArray = Array(matches);
+    }
+  }
 
-  private applyOpacity(elements: any[], numberOfMatches: number, numberOfRemovedMatches: number) {
+  private previewMatches(matchesToPreview: number) {
+    // We get the HTMLCollection containing all the matches
+      let elements = Array.from(document.getElementsByClassName('match'));
+      this.applyOpacity(elements, matchesToPreview);
+  }
+
+  private applyOpacity(elements: any[], matchesToPreview: number) {
+    let matches = elements.length;
     elements
-      // We select the matches that can be selected this turn
-      .splice(numberOfMatches - MAX_NUMBER_OF_MATCHES_REMOVED, numberOfMatches)
+      // We select all the matches that can be selected this turn
+      .splice(matches - MAX_NUMBER_OF_MATCHES_REMOVED, matches)
       // We apply the opacity on the selected matches, and restore it on the unselected matches
       .map((element, index) => {
-        if (index < MAX_NUMBER_OF_MATCHES_REMOVED - numberOfRemovedMatches) {
+        if (index < MAX_NUMBER_OF_MATCHES_REMOVED - matchesToPreview) {
           this.removeOpacityFromMatch(element);
         } else {
           this.addOpacityToMatch(element);
