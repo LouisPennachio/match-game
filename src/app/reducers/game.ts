@@ -35,6 +35,11 @@ export function gameReducer(state = initialState, action: matches.Actions | game
                 player: state.player
             }
         case (matches.TAKE):
+            // A player must pick a number of matches to remove before ending his turn.
+            if (state.matchesToPreview == 0) {
+                return state;
+            }
+
             let remainingMatches = state.matches - state.matchesToPreview;
             return {
                 gameEnded: remainingMatches == 0,

@@ -48,13 +48,14 @@ export class BoardComponent implements OnInit {
     let matches = elements.length;
     elements
       // We select all the matches that can be selected this turn
-      .splice(matches - MAX_NUMBER_OF_MATCHES_REMOVED, matches)
+      .slice(Math.max(0, matches - MAX_NUMBER_OF_MATCHES_REMOVED), matches)
+      .reverse()
       // We apply the opacity on the selected matches, and restore it on the unselected matches
       .map((element, index) => {
-        if (index < MAX_NUMBER_OF_MATCHES_REMOVED - matchesToPreview) {
-          this.removeOpacityFromMatch(element);
-        } else {
+        if (index + 1 <= matchesToPreview) {
           this.addOpacityToMatch(element);
+        } else {
+          this.removeOpacityFromMatch(element);
         }
       });
   }
