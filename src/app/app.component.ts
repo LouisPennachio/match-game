@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { State } from './reducers/game';
 import { INIT } from './actions/game';
@@ -11,7 +12,15 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'match-game';
 
+  private gameState: Observable<State>;
+
+  gameEnded: boolean;
+
   constructor(private store: Store<State>) {
+    this.gameState = store.select('game');
+    this.gameState.subscribe(state => {
+      this.gameEnded = state.gameEnded;
+    });
     store.dispatch({type: INIT});
   }
 }

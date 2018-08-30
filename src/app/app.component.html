@@ -7,10 +7,10 @@
   <div class="status-container">
     <status></status>
   </div>
-  <div class="board-container">
+  <div class="board-container" *ngIf="!gameEnded" >
     <board></board>
   </div>
-  <div class="controls-container">
+  <div>
     <controls></controls>
   </div>
 </div>
