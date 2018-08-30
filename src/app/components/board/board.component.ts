@@ -23,6 +23,9 @@ export class BoardComponent implements OnInit {
       this.matchesArray = Array(matches);
     });
 
+    ngOnInit() {
+    }
+    
     gameService.previewMatches.subscribe(numberOfRemovedMatches => {
       // We get the HTMLCollection containing all the matches
       let elements = Array.from(document.getElementsByClassName('match'));
@@ -31,8 +34,7 @@ export class BoardComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-  }
+
 
   private applyOpacity(elements: any[], numberOfMatches: number, numberOfRemovedMatches: number) {
     elements
