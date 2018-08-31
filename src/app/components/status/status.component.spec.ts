@@ -41,18 +41,16 @@ describe('StatusComponent', () => {
       player: player
     };
 
-    it('should display player turn when the game is ongoing', () => {
+    it('should display whose turn it is when the game is ongoing', () => {
+      state.gameEnded = false;
       component.updateStatus(state);
-      expect(component.status === 'It\'s Player 1 turn !').toBe(true);
+      expect(component.status === `It's ${state.player.name} turn !`).toBe(true);
     });
-  
-    it('should display who won when the game is over', () => {  
+
+    it('should display who won when the game is over', () => {
       state.gameEnded = true;
-  
       component.updateStatus(state);
-  
-      expect(component.status === 'Player 1 won !').toBe(true);
+      expect(component.status === `${state.player.name} won !`).toBe(true);
     });
   });
-  
 });
