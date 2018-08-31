@@ -47,8 +47,9 @@ export class BoardComponent implements OnInit {
   private applyOpacity(elements: any[], matchesToPreview: number) {
     let matches = elements.length;
     elements
-      // We select all the matches that can be selected this turn
+      // We select the last N matches (that the player selected)
       .slice(Math.max(0, matches - MAX_NUMBER_OF_MATCHES_REMOVED), matches)
+      // We will process them from right to left
       .reverse()
       // We apply the opacity on the selected matches, and restore it on the unselected matches
       .map((element, index) => {
