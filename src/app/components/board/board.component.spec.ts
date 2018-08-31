@@ -1,6 +1,9 @@
+import { StoreModule } from '@ngrx/store';
+import { AppModule } from './../../app.module';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BoardComponent } from './board.component';
+import { gameReducer } from '../../reducers/game';
 
 describe('BoardComponent', () => {
   let component: BoardComponent;
@@ -8,9 +11,12 @@ describe('BoardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BoardComponent ]
+      declarations: [BoardComponent],
+      imports: [
+        StoreModule.forRoot({ game: gameReducer })
+      ],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
