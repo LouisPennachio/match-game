@@ -19,6 +19,10 @@ export class AppComponent {
     this.gameState.subscribe(state => {
       this.gameEnded = state.gameEnded;
     });
-    store.dispatch({type: INIT});
+    this.initGame();
+  }
+
+  private initGame() {
+    this.store.dispatch({type: INIT});
   }
 }

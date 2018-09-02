@@ -16,7 +16,7 @@ export class StatusComponent implements OnInit {
   constructor(private store: Store<State>) {
     this.gameState = store.select('game');
     this.gameState.subscribe(state => {
-      this.updateStatus(state);
+      this.onNewState(state);
     });
   }
 
@@ -32,11 +32,16 @@ export class StatusComponent implements OnInit {
    * 
    * @param state The current game state.
    */
-  updateStatus(state: State) {
-    if (!state.gameEnded) {
-      this.status = `It's ${state.player.name} turn !`;
-    } else {
-      this.status = `${state.player.name} won !`;
+  onNewState(state: State) {
+    let player = state.player;
+
+    // For now we only display player-related data, so if we don't know whose turn it is yet, we don't have to go any further
+    if (player !== undefined) {
+      if (!state.gameEnded) {
+        this.status = `It's ${state.player.name} turn !`;
+      } else {
+        this.status = `${state.player.name} won !`;
+      }
     }
   }
 }

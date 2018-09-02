@@ -1,3 +1,4 @@
+import { By } from '@angular/platform-browser';
 import { PLAYERS } from './../../shared/constants';
 import { State } from './../../reducers/game';
 import { StoreModule } from '@ngrx/store';
@@ -27,30 +28,34 @@ describe('StatusComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
   describe('status message tests', () => {
-    let player: Player = PLAYERS[0];
-
     let state: State = {
       gameEnded: false,
       matchesToPreview: 0,
       matches: 0,
-      player: player
+      player: PLAYERS[0]
     };
 
     it('should display whose turn it is when the game is ongoing', () => {
+      // We make the game ongoing
       state.gameEnded = false;
-      component.updateStatus(state);
-      expect(component.status === `It's ${state.player.name} turn !`).toBe(true);
+
+      component.onNewState(state);
+      fixture.detectChanges();
+      
+      let status = fixture.debugElement.query(By.css('p'));
+      expect(status.nativeElement.innerHTML).toEqual(`It's ${state.player.name} turn !`);
     });
 
     it('should display who won when the game is over', () => {
+      // We make the game to be over
       state.gameEnded = true;
-      component.updateStatus(state);
-      expect(component.status === `${state.player.name} won !`).toBe(true);
+
+      component.onNewState(state);
+      fixture.detectChanges();
+
+      let status = fixture.debugElement.query(By.css('p'));
+      expect(status.nativeElement.innerHTML).toEqual(`${state.player.name} won !`);
     });
   });
 });

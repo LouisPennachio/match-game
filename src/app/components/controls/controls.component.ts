@@ -24,9 +24,13 @@ export class ControlsComponent implements OnInit {
   constructor(private store: Store<State>) {
     this.gameState = store.select('game');
     this.gameState.subscribe(state => {
-      this.numberOfRemovableMatches = this.getNumberOfRemovableMatches(state.matches);
-      this.gameEnded = state.gameEnded;
+      this.onNewState(state);
     });
+  }
+
+  private onNewState(state: State) {
+    this.numberOfRemovableMatches = this.getNumberOfRemovableMatches(state.matches);
+    this.gameEnded = state.gameEnded;
   }
 
   ngOnInit() {

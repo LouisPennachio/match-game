@@ -6,5 +6,5 @@
     </div>
     <br/>
 </div>
-<button type="button" class="action" (click)="endTurn()" *ngIf="!gameEnded">End turn</button>
-<button type="button" class="action" (click)="restartGame()" *ngIf="gameEnded">Restart Game</button>
+<button type="button" class="end-turn" (click)="endTurn()" *ngIf="!gameEnded" #endTurn>End turn</button>
+<button type="button" class="restart-game" (click)="restartGame()" *ngIf="gameEnded" #restartGame>Restart Game</button>
