@@ -94,8 +94,8 @@ describe('BoardComponent', () => {
   it('should preview the proper number of matches', () => {
     let state: State = {
       gameEnded: false,
-      matchesToPreview: 3,
-      matches: 3,
+      matchesToPreview: 2,
+      matches: 2,
       player: PLAYERS[0]
     };
 
@@ -103,10 +103,10 @@ describe('BoardComponent', () => {
 
     fixture.detectChanges();
 
-    fixture.whenRenderingDone().then(() => {
-      let matches = fixture.debugElement.queryAll(By.css('.match'))[0].nativeElement;
+    console.log('lel');
+
+    let matches = fixture.debugElement.queryAll(By.css('.transparent-match'))[0].nativeElement;
       console.log(matches);
-    });
    
     // let removableMatches = (component as any).getPlayableMatches((component as any).getMatchesElements(fixture.elementRef.nativeElement));
 
@@ -115,7 +115,7 @@ describe('BoardComponent', () => {
     //   console.log('matches=' + state.matches + ' ' + 'matchesToPreview=' + state.matchesToPreview + ' ' + 'index=' + index + ' ' + 'shouldOpacify=' + (component as any).shouldOpacifyMatch(index, state.matchesToPreview) + ' ' + 'isOpacified=' + match.classList.contains('transparent-match'));
     //   expect((component as any).shouldOpacifyMatch(index, state.matchesToPreview) === match.classList.contains('transparent-match')).toBe(true);
     // });
-  // });
+  });
 
 
 

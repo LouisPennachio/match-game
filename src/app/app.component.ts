@@ -17,7 +17,7 @@ export class AppComponent {
   constructor(private store: Store<State>) {
     this.gameState = store.select('game');
     this.gameState.subscribe(state => {
-      this.gameEnded = state.gameEnded;
+      this.gameEnded = state == null || state.gameEnded;
     });
     this.initGame();
   }

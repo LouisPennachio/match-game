@@ -11,14 +11,14 @@ export interface State {
     player: Player;
 };
 
-export const initialState: State = {
-    gameEnded: true,
-    matchesToPreview: 0,
-    matches: 0,
-    player: undefined
-};
+// export const initialState: State = {
+//     gameEnded: true,
+//     matchesToPreview: 0,
+//     matches: 0,
+//     player: undefined
+// };
 
-export function gameReducer(state = initialState, action: matches.Actions | game.Actions): State {
+export function gameReducer(state: State, action: matches.Actions | game.Actions): State {
     switch (action.type) {
         case game.INIT:
             return {

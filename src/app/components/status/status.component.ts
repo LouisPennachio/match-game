@@ -33,15 +33,10 @@ export class StatusComponent implements OnInit {
    * @param state The current game state.
    */
   onNewState(state: State) {
-    let player = state.player;
-
-    // For now we only display player-related data, so if we don't know whose turn it is yet, we don't have to go any further
-    if (player !== undefined) {
-      if (!state.gameEnded) {
-        this.status = `It's ${state.player.name} turn !`;
-      } else {
-        this.status = `${state.player.name} won !`;
-      }
+    if (!state.gameEnded) {
+      this.status = `It's ${state.player.name} turn !`;
+    } else {
+      this.status = `${state.player.name} won !`;
     }
   }
 }
