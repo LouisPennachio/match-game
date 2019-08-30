@@ -7,18 +7,18 @@
   <div class="status-container">
     <status></status>
   </div>
-  <div *ngIf="state.gameEnded">
-    <div *ngIf="state.player.id == 0">
-      <iframe src="https://giphy.com/embed/l4FGEhHXgExT9UquA" width="480" height="356" frameBorder="0"
-        class="giphy-embed" allowFullScreen></iframe>
+  <div class="board-container">
+    <board *ngIf="!state.gameEnded"></board>
+    <div *ngIf="state.gameEnded">
+      <div *ngIf="state.player.id == 0">
+        <iframe src="https://giphy.com/embed/l4FGEhHXgExT9UquA" width="480" height="356" frameBorder="0"
+          class="giphy-embed" allowFullScreen></iframe>
+      </div>
+      <div *ngIf="state.player.id == 1">
+        <iframe src="https://giphy.com/embed/xT0GqChmT6HaiMwjoA" width="480" height="200" frameBorder="0"
+          class="giphy-embed" allowFullScreen></iframe>
+      </div>
     </div>
-    <div *ngIf="state.player.id == 1">
-      <iframe src="https://giphy.com/embed/xT0GqChmT6HaiMwjoA" width="480" height="200" frameBorder="0"
-        class="giphy-embed" allowFullScreen></iframe>
-    </div>
-  </div>
-  <div class="board-container" *ngIf="!state.gameEnded">
-    <board></board>
   </div>
   <div>
     <controls></controls>
