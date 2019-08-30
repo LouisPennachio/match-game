@@ -1,25 +1,27 @@
 # Match Game
 
+### [CLICK HERE TO PLAY][gameUrl]
+
 Match game is an implementation of the [Nim game strategy][nim] with matches.
 Play with a friend, remove 1, 2, or 3 match every turn. If you take the last match, you win.
 For now, the game must be played locally.
+
 ### Tech
 
 The game runs in a browser and is implemented with [Angular 6][Angular 6]. It features: 
-* HTML, CSS, [TypeScript][typescript] - Web stack
-* [ngrx/store][store] - Game logic handling
-* [Jasmine][jasmine] - To write unit tests
-* [Karma][karma] - To run unit test
-* [rxjs][rxjs] - For event handling
+* HTML, SCSS, [TypeScript][typescript] - Web stack
+* [ngrx/store][store] - State handling
+* [Jasmine][jasmine] and [Karma][karma] - Unit tests
+* [rxjs][rxjs] - Bec
 
-### Installation
+### Local installation
 
 Match Game requires [Node.js](https://nodejs.org/) v8.11.4+ to run.
 
 Install the dependencies and start the server.
 
 ```sh
-$ npm install
+$ npm i
 $ ng serve
 ```
 
@@ -40,3 +42,4 @@ MIT
    [jasmine]: <https://jasmine.github.io/>
    [karma]: <https://karma-runner.github.io/2.0/index.html>
    [Angular 6]: <https://angular.io/>
+   [gameUrl]:  http://d28qa9qdu39ew3.cloudfront.net/
