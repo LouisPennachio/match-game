@@ -1,6 +1,6 @@
 import { State } from './../../reducers/game';
-import { Observable } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 @Component({
@@ -8,20 +8,25 @@ import { Store } from '@ngrx/store';
   templateUrl: './status.component.html',
   styleUrls: ['./status.component.css']
 })
-export class StatusComponent implements OnInit {
-  status: String;
+export class StatusComponent implements OnDestroy {
+  /**
+   * The current game status.
+   */
+  public status: String;
 
-  private gameState: Observable<State>;
+  /**
+   * Holds the current subscriptions.
+   */
+  private subscription: Subscription;
 
   constructor(private store: Store<State>) {
-    this.gameState = store.select('game');
-    this.gameState.subscribe(state => {
+    this.subscription = store.select('game').subscribe(state => {
       this.onNewState(state);
     });
   }
 
-  ngOnInit() {
-
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   /**

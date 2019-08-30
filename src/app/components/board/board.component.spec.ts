@@ -58,7 +58,7 @@ describe('BoardComponent', () => {
           player: PLAYERS[0]
         };
 
-        component.onNewState(state);
+        component["onNewState"](state);
 
         fixture.detectChanges();
 

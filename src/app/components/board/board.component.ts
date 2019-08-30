@@ -1,7 +1,7 @@
 import { State } from './../../reducers/game';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { MAX_NUMBER_OF_MATCHES_REMOVED } from './../../shared/constants';
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 @Component({
@@ -9,7 +9,7 @@ import { Store } from '@ngrx/store';
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.css']
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent implements OnDestroy {
 
   /**
    * Allows us to use *ngFor to display the matches.
@@ -17,23 +17,26 @@ export class BoardComponent implements OnInit {
    * 
    * This is also used to tell if a match should be rendered with some transparency.
    */
-  matchesArray: boolean[] = [];
+  public matchesArray: boolean[] = [];
 
   @ViewChild("matches") matches: ElementRef;
 
-  private gameState: Observable<State>;
+  /**
+   * Holds the current subscriptions.
+   */
+  private subscription: Subscription;
 
   constructor(private store: Store<State>) {
-    this.gameState = store.select('game');
-    this.gameState.subscribe(state => {
+    this.subscription = store.select('game').subscribe(state => {
       this.onNewState(state);
     });
   }
 
-  ngOnInit() {
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
-  onNewState(state: State) {
+  private onNewState(state: State): void {
     let matches = state.matches;
     let matchesToPreview = state.matchesToPreview;
 
@@ -42,7 +45,7 @@ export class BoardComponent implements OnInit {
       this.matchesArray = Array(matches);
     }
 
-    // Transparency update (remvoval)
+    // Transparency update (removal)
     for (var i = 0; i < matches - matchesToPreview; i++) {
       this.matchesArray[i] = false;
     }
@@ -58,7 +61,7 @@ export class BoardComponent implements OnInit {
    * 
    * @param index the index of the match
    */
-  shouldBeTransparent(index: number): boolean {
+  public shouldBeTransparent(index: number): boolean {
     return this.matchesArray[index];
   }
 }

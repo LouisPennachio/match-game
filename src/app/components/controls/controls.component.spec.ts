@@ -49,38 +49,4 @@ describe('ControlsComponent', () => {
       expect(numberOfMatchesThatCanBePreviewd === Math.min(i, MAX_NUMBER_OF_MATCHES_REMOVED)).toBeTruthy();
     }
   });
-
-  it('should allow the player to end his turn when the game is ongoing', () => {
-    let state: State = {
-      gameEnded: false,
-      matchesToPreview: 0,
-      matches: 1,
-      player: PLAYERS[0]
-    };
-
-    (component as any).onNewState(state);
-    fixture.detectChanges();
-
-    let endTurnButton = fixture.debugElement.query(By.css('.end-turn'));
-    let restartGameButton = fixture.debugElement.query(By.css('.restart-game'));
-    expect(restartGameButton).toBeNull();
-    expect(endTurnButton).toBeDefined();
-  });
-
-  it('should allow the player to restart the game when the game is over', () => {
-    let state: State = {
-      gameEnded: true,
-      matchesToPreview: 0,
-      matches: 0,
-      player: PLAYERS[0]
-    };
-
-    (component as any).onNewState(state);
-    fixture.detectChanges();
-
-    let endTurnButton = fixture.debugElement.query(By.css('.end-turn'));
-    let restartGameButton = fixture.debugElement.query(By.css('.restart-game'));
-    expect(endTurnButton).toBeNull();
-    expect(restartGameButton).toBeDefined();
-  });
 });

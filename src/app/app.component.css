@@ -1,17 +1,17 @@
 .header-container h1 {
-    margin: 0;
-    margin-top: 5%;
+  margin: 0;
+  margin-top: 5%;
 }
 
 .rules {
-    font-size: 14px;
+  font-size: 18px;
 }
 
 .status-container {
-    margin-top: 2%;
+  margin-top: 2%;
 }
 
 .board-container {
-    margin-top: 7%;
-    margin-bottom: 7%;
+  margin-top: 7%;
+  margin-bottom: 7%;
 }

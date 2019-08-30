@@ -1,8 +1,8 @@
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { State } from './reducers/game';
 import { INIT } from './actions/game';
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 
 /**
  * AppComponent coordinates the components of the game.
@@ -12,34 +12,38 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
   /**
-   * Observable that emits the game state.
+   * The current game state.
    */
-  private gameState: Observable<State>;
+  public state: State;
 
   /**
-   * Flag telling if the game is ended or not.
+   * Holds the current subscriptions.
    */
-  gameEnded: boolean;
+  private subscription: Subscription;
 
   constructor(private store: Store<State>) {
-    // We retrieve the game stat observable.
-    this.gameState = store.select('game');
-
     // We subscribe to the game observable to monitor the game state.
-    this.gameState.subscribe(state => {
-      this.gameEnded = state.gameEnded;
+    this.subscription = store.select('game').subscribe(state => {
+      if (state != null) {
+        this.state = state;
+        console.log(JSON.stringify(this.state));
+      }
     });
 
     // We start the game !
     this.initGame();
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
   /**
    * Will dispatch the INIT event to the game reducer.
    */
   private initGame() {
-    this.store.dispatch({type: INIT});
+    this.store.dispatch({ type: INIT });
   }
 }

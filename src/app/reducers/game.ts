@@ -1,9 +1,12 @@
 import * as game from '../actions/game';
 import * as matches from '../actions/matches';
-import * as playerHelper from '../shared/helpers/player'
-import * as matchesHelper from '../shared/helpers/matches'
+import * as playerHelper from '../shared/helpers/player-helper'
+import * as matchesHelper from '../shared/helpers/match-helper'
 import { Player } from '../model/player';
 
+/**
+ * Gathers all the required data to represent the game state at a given time.
+ */
 export interface State {
     gameEnded: boolean;
     matchesToPreview: number;
@@ -11,13 +14,9 @@ export interface State {
     player: Player;
 };
 
-// export const initialState: State = {
-//     gameEnded: true,
-//     matchesToPreview: 0,
-//     matches: 0,
-//     player: undefined
-// };
-
+/**
+ * Reducer implementation for the match game.
+ */
 export function gameReducer(state: State, action: matches.Actions | game.Actions): State {
     switch (action.type) {
         case game.INIT:

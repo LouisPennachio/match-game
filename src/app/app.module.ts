@@ -17,6 +17,8 @@ import { gameReducer } from './reducers/game';
   ],
   imports: [
     BrowserModule,
+
+    // We add the game reducer to our module
     StoreModule.forRoot({ game: gameReducer })
   ],
   bootstrap: [AppComponent]

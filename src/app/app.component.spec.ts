@@ -6,6 +6,7 @@ import { StatusComponent } from './components/status/status.component';
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { gameReducer } from './reducers/game';
+
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({

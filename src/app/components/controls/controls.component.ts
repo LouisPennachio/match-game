@@ -3,29 +3,38 @@ import { MAX_NUMBER_OF_MATCHES_REMOVED } from './../../shared/constants';
 import { Store } from '@ngrx/store';
 import { PREVIEW, TAKE } from './../../actions/matches';
 import { State } from './../../reducers/game';
-import { Observable } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'controls',
   templateUrl: './controls.component.html',
   styleUrls: ['./controls.component.css']
 })
-export class ControlsComponent implements OnInit {
+export class ControlsComponent implements OnDestroy {
   /**
    * Defines how many matches (max) can be removed this turn.
    */
-  numberOfRemovableMatches: number;
+  public numberOfRemovableMatches: number;
 
-  gameEnded: boolean; 
+  /**
+   * Flag that tells if the game has ended.
+   */
+  public gameEnded: boolean;
 
-  private gameState: Observable<State>;
+  /**
+   * Holds the current subscriptions.
+   */
+  private subscription: Subscription;
 
   constructor(private store: Store<State>) {
-    this.gameState = store.select('game');
-    this.gameState.subscribe(state => {
+    this.subscription = store.select('game').subscribe(state => {
       this.onNewState(state);
     });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   private onNewState(state: State) {
@@ -33,26 +42,34 @@ export class ControlsComponent implements OnInit {
     this.gameEnded = state.gameEnded;
   }
 
-  ngOnInit() {
+  /**
+   * Dispatches a preview event.
+   * 
+   * @param matches The number of matches to preview.
+   */
+  public preview(matches: number): void {
+    this.store.dispatch({ type: PREVIEW, payload: matches });
   }
 
-  preview(matches: number) {
-    this.store.dispatch({type: PREVIEW, payload: matches});
+  /**
+   * Dispatches an end turn event.
+   */
+  public endTurn(): void {
+    this.store.dispatch({ type: TAKE });
   }
 
-  endTurn() {
-    this.store.dispatch({type: TAKE});
-  }
-
-  restartGame() {
-    this.store.dispatch({type: INIT});
+  /**
+  * Dispatches a restart game event.
+  */
+  public restartGame(): void {
+    this.store.dispatch({ type: INIT });
   }
 
   /**
    * Returns the max amount of matches that can be removed this turn, depending on how many matches are in game.
    * For example, if only 2 matches are remaining, we don't want to allow the user to remove 3.
    */
-  private getNumberOfRemovableMatches(numberOfMatches: number) {
+  private getNumberOfRemovableMatches(numberOfMatches: number): number {
     return numberOfMatches >= MAX_NUMBER_OF_MATCHES_REMOVED ? MAX_NUMBER_OF_MATCHES_REMOVED : numberOfMatches;
   }
 }
