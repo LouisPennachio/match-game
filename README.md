@@ -4,15 +4,18 @@
 
 Match game is an implementation of the [Nim game strategy][nim] with matches.
 Play with a friend, remove 1, 2, or 3 match every turn. If you take the last match, you win.
-For now, the game must be played locally.
+For now, the players must play on the same computer.
 
 ### Tech
 
-The game runs in a browser and is implemented with [Angular 6][Angular 6]. It features: 
+The game runs in a browser and is implemented with [Angular 6][Angular 6].
+
+It features: 
 * HTML, SCSS, [TypeScript][typescript] - Web stack
-* [ngrx/store][store] - State handling
+* [ngrx/store][store] - Game state handling
+* [rxjs][rxjs] - Reactive programming
 * [Jasmine][jasmine] and [Karma][karma] - Unit tests
-* [rxjs][rxjs] - Bec
+
 
 ### Local installation
 
