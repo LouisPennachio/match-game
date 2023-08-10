@@ -1,7 +1,5 @@
 # Match Game
 
-### [CLICK HERE TO PLAY][gameUrl]
-
 Match game is an implementation of the [Nim game strategy][nim] with matches.
 Play with a friend, remove 1, 2, or 3 match every turn. If you take the last match, you win.
 For now, the players must play on the same computer.
